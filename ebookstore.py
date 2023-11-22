@@ -9,8 +9,8 @@ import sqlite3
 
 
 def create_database_and_table():
-    conn = sqlite3.connect("ebookstore.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connect("ebookstore.db")
+    cursor = connection.cursor()
 
     
 
@@ -36,14 +36,14 @@ def create_database_and_table():
         ]
         cursor.executemany("INSERT INTO book (id, title, author, qty) VALUES (?, ?, ?, ?)", initial_data)
 
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
 
 # Function to add a new book to the database with a unique ID
 
 def add_book():
-    conn = sqlite3.connect("ebookstore.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connect("ebookstore.db")
+    cursor = connection.cursor()
 
    
 
@@ -59,42 +59,42 @@ def add_book():
     qty = int(input("Enter quantity: "))
 
     cursor.execute("INSERT INTO book (id, title, author, qty) VALUES (?, ?, ?, ?)", (new_id, title, author, qty))
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
     print("Book added successfully!")
 
 # Function to update book information in the database
 
 def update_book():
-    conn = sqlite3.connect("ebookstore.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connect("ebookstore.db")
+    cursor = connection.cursor()
 
     id = int(input("Enter book ID to update: "))
     qty = int(input("Enter new quantity: "))
 
     cursor.execute("UPDATE book SET qty = ? WHERE id = ?", (qty, id))
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
     print("Book information updated successfully!")
 
- Function to delete a book from the database
+ #Function to delete a book from the database
 
 def delete_book():
-    conn = sqlite3.connect("ebookstore.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connect("ebookstore.db")
+    cursor = connection.cursor()
 
     id = int(input("Enter book ID to delete: "))
 
     cursor.execute("DELETE FROM book WHERE id = ?", (id,))
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
     print("Book deleted successfully!")
 
 # Function to search for a book in the database
 
 def search_books():
-    conn = sqlite3.connect("ebookstore.db")
-    cursor = conn.cursor()
+    connection = sqlite3.connection("ebookstore.db")
+    cursor = connection.cursor()
 
     keyword = input("Enter book title or author to search: ")
     cursor.execute("SELECT * FROM book WHERE title LIKE ? OR author LIKE ?", ('%' + keyword + '%', '%' + keyword + '%'))
@@ -107,7 +107,7 @@ def search_books():
     else:
         print("No matching books found.")
 
-    conn.close()
+    connection.close()
 
 # Main program loop
 
