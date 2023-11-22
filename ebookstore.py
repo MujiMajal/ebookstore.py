@@ -2,7 +2,7 @@
 File name: ebookstore.py
 
 '''
-
+# Function to create the database and table if they don't exist
 
 import sqlite3
 
@@ -23,7 +23,7 @@ def create_database_and_table():
     )
     """)
 
-    
+    # Insert initial data into the table if it's empty
 
     cursor.execute("SELECT COUNT(*) FROM book")
     if cursor.fetchone()[0] == 0:
@@ -39,13 +39,13 @@ def create_database_and_table():
     conn.commit()
     conn.close()
 
-
+# Function to add a new book to the database with a unique ID
 
 def add_book():
     conn = sqlite3.connect("ebookstore.db")
     cursor = conn.cursor()
 
-    
+   
 
     cursor.execute("SELECT MAX(id) FROM book")
     max_id = cursor.fetchone()[0]
@@ -63,7 +63,7 @@ def add_book():
     conn.close()
     print("Book added successfully!")
 
-
+# Function to update book information in the database
 
 def update_book():
     conn = sqlite3.connect("ebookstore.db")
@@ -77,7 +77,7 @@ def update_book():
     conn.close()
     print("Book information updated successfully!")
 
-
+ Function to delete a book from the database
 
 def delete_book():
     conn = sqlite3.connect("ebookstore.db")
@@ -90,7 +90,7 @@ def delete_book():
     conn.close()
     print("Book deleted successfully!")
 
-
+# Function to search for a book in the database
 
 def search_books():
     conn = sqlite3.connect("ebookstore.db")
@@ -109,7 +109,7 @@ def search_books():
 
     conn.close()
 
-
+# Main program loop
 
 if __name__ == "__main__":
     create_database_and_table()
